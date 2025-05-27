@@ -53,5 +53,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
         <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
-    )       
+    )
 }
