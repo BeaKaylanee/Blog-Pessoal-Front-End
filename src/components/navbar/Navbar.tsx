@@ -14,17 +14,17 @@ function Navbar() {
         alert('O Usuário foi desconectado com sucesso!')
         navigate('/')
     }
-    
+
     return (
         <>
-              <div className="w-full bg-indigo-900 text-white py-4">
-              <div className="flex justify-between items-center px-5 text-lg font-bold">
-                <Link to='/home' className="text-2xl font-bold">Blog Pessoal</Link>
+            <div className="w-full bg-indigo-900 text-white py-4">
+                <div className="flex justify-between items-center px-5 text-lg font-bold">
+                    <Link to='/home' className="text-2xl font-bold">Blog Pessoal</Link>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:underline">Postagens</a>
+                        <Link to='/postagens' className='hover:underline'>Postagens</Link>                        
                         <Link to='/temas' className='hover:underline'>Temas</Link>
-                        <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link> 
-                         Perfil
+                        <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
+                        <Link to='/perfil' className='hover:underline'>Perfil</Link>
                         <Link to='' onClick={logout} className='hover:underline'>Sair</Link>
                     </div>
                 </div>

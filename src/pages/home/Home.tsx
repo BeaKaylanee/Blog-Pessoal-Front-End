@@ -1,3 +1,6 @@
+import ListaPostagens from "../../components/postagens/listapostagem/ListaPostagem"
+import ModalPostagem from "../../components/postagens/modalpostagem/ModalPostagem"
+
 function Home() {
     return (
         <>
@@ -12,27 +15,25 @@ function Home() {
                         </p>
 
                         <div className="flex justify-around gap-4">
-                            <button className='rounded text-white cursor-not-allowed md:cursor-auto
-                                            border-white border-solid border-2 py-2 px-4
-                                            transform hover:-translate-y-1 
-                                            transition-colors duration-500 ease-in-out
-                                            hover:bg-repeat-x hover:bg-purple-700'
-                                >
-                                Nova Postagem
-                            </button>
+                            <div className="flex justify-around gap-4">
+                                <ModalPostagem />
+                            </div>
                         </div>
                     </div>
+
                     <div className="flex justify-center ">
-                    <img
-                      src="https://i.imgur.com/fyfri1v.png"
-                      alt="Imagem Página Home"
-                      className="w-4/4object-contain"
-                    />
+                        <img
+                            src="https://i.imgur.com/fyfri1v.png"
+                            alt="Imagem Página Home"
+                            className='w-2/3'
+                        />
                     </div>
                 </div>
             </div>
+
+            <ListaPostagens />
         </>
     )
 }
 
-export default Home;
+export default Home
