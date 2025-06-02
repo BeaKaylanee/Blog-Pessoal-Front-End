@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <ToastContainer />
+        <ToastContainer/>
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
@@ -36,8 +36,8 @@ function App() {
               <Route path="/editartema/:id" element={<FormTema />} />
               <Route path="/deletartema/:id" element={<DeletarTema />} />
               <Route path="/postagens" element={<ListaPostagens />} />
-              <Route path="/cadastrar-postagem" element={<FormPostagem />} />
-              <Route path="/editar-postagem/:id" element={<FormPostagem />} />
+              <Route path="/cadastrarpostagem" element={<FormPostagem />} />
+              <Route path="/editarpostagem/:id" element={<FormPostagem />} />
               <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
               <Route path="/perfil" element={<Perfil />} />
             </Routes>
@@ -49,4 +49,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
