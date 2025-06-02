@@ -3,13 +3,11 @@ import CardPostagens from "../cardpostagens/CardPostagens";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Postagem from "../../../models/Postagem";
-import { buscar } from "../../../services/Services";
+import { buscar } from "../../../services/Service";
 import { DNA } from "react-loader-spinner";
 
 function ListaPostagens() {
-
     const navigate = useNavigate();
-
     const [postagens, setPostagens] = useState<Postagem[]>([]);
 
     const { usuario, handleLogout } = useContext(AuthContext);
@@ -21,25 +19,26 @@ function ListaPostagens() {
                 headers: {
                     Authorization: token,
                 },
-            })
-
+            });
         } catch (error: any) {
             if (error.toString().includes('403')) {
-                handleLogout()
+                handleLogout();
             }
         }
     }
 
+    // Verifica se está logado
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            alert('Você precisa estar logado');
             navigate('/');
         }
-    }, [token])
+    }, [token]);
 
+    // Busca postagens apenas uma vez quando o componente for montado
     useEffect(() => {
-        buscarPostagens()
-    }, [postagens.length])
+        buscarPostagens();
+    }, []); // <-- correção aqui
 
     return (
         <>

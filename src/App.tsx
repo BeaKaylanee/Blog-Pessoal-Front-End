@@ -6,18 +6,23 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import Cadastro from './pages/cadastro/Cadastro'
 import { AuthProvider } from './contexts/AuthContext'
-import ListaTemas from './temas/listatemas/ListaTemas'
-import FormTema from './temas/formtema/FormTema'
-import DeletarTema from './temas/deletartema/DeletarTema'
+import ListaTemas from './components/listatemas/ListaTemas'
+import FormTema from './components/formtema/FormTema'
+import DeletarTema from './components/deletartema/DeletarTema'
 import ListaPostagens from './components/postagens/listapostagem/ListaPostagem'
 import FormPostagem from './components/postagens/formpostagem/FormPostagem'
 import DeletarPostagem from './components/postagens/deletarpostagem/DeletarPostagem'
 import Perfil from './pages/perfil/Perfil'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
     <>
       <AuthProvider>
+        <ToastContainer />
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
@@ -31,8 +36,8 @@ function App() {
               <Route path="/editartema/:id" element={<FormTema />} />
               <Route path="/deletartema/:id" element={<DeletarTema />} />
               <Route path="/postagens" element={<ListaPostagens />} />
-              <Route path="/cadastrarpostagem" element={<FormPostagem />} />
-              <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+              <Route path="/cadastrar-postagem" element={<FormPostagem />} />
+              <Route path="/editar-postagem/:id" element={<FormPostagem />} />
               <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
               <Route path="/perfil" element={<Perfil />} />
             </Routes>

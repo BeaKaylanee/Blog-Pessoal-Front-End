@@ -1,4 +1,4 @@
-import ListaPostagens from "../../components/postagens/listapostagem/ListaPostagem"
+import ListaPostagens from "../../components/postagens/listapostagem/ListaPostagem.tsx"
 import ModalPostagem from "../../components/postagens/modalpostagem/ModalPostagem"
 
 function Home() {

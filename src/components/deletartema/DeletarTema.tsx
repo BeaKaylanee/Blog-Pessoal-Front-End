@@ -1,25 +1,26 @@
 import { useState, useContext, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { AuthContext } from "../../../contexts/AuthContext"
-import type Postagem from "../../../models/Postagem"
-import { buscar, deletar } from "../../../services/Service"
+import { useNavigate, useParams } from "react-router"
+import { AuthContext } from "../../contexts/AuthContext";
+import type Tema from "../../models/Tema"
+import { buscar, deletar } from "../../services/Service"
 import { RotatingLines } from "react-loader-spinner"
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
-function DeletarPostagem() {
+function DeletarTema() {
 
     const navigate = useNavigate()
 
+    const [tema, setTema] = useState<Tema>({} as Tema)
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [postagem, setPostagem] = useState<Postagem>({} as Postagem)
-
-    const { id } = useParams<{ id: string }>()
-
+    
     const { usuario, handleLogout } = useContext(AuthContext)
     const token = usuario.token
 
+    const { id } = useParams<{ id: string }>()
+
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/postagens/${id}`, setPostagem, {
+            await buscar(`/temas/${id}`, setTema, {
                 headers: {
                     'Authorization': token
                 }
@@ -33,7 +34,7 @@ function DeletarPostagem() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado')
+            ToastAlerta('Você precisa estar logado', 'info')
             navigate('/')
         }
     }, [token])
@@ -44,23 +45,23 @@ function DeletarPostagem() {
         }
     }, [id])
 
-    async function deletarPostagem() {
+    async function deletarTema() {
         setIsLoading(true)
 
         try {
-            await deletar(`/postagens/${id}`, {
+            await deletar(`/temas/${id}`, {
                 headers: {
                     'Authorization': token
                 }
             })
 
-            alert('Postagem apagada com sucesso')
+            ToastAlerta("Tema apagado com sucesso", "sucesso")
 
         } catch (error: any) {
             if (error.toString().includes('403')) {
                 handleLogout()
             }else {
-                alert('Erro ao deletar a postagem.')
+                ToastAlerta("Erro ao deletar o tema.", "erro")
             }
         }
 
@@ -69,26 +70,20 @@ function DeletarPostagem() {
     }
 
     function retornar() {
-        navigate("/postagens")
+        navigate("/temas")
     }
     
     return (
         <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center my-4'>Deletar Postagem</h1>
-
+            <h1 className='text-4xl text-center my-4'>Deletar tema</h1>
             <p className='text-center font-semibold mb-4'>
-                Você tem certeza de que deseja apagar a postagem a seguir?
-            </p>
-
+                Você tem certeza de que deseja apagar o tema a seguir?</p>
             <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
                 <header 
                     className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
-                    Postagem
+                    Tema
                 </header>
-                <div className="p-4">
-                    <p className='text-xl h-full'>{postagem.titulo}</p>
-                    <p>{postagem.texto}</p>
-                </div>
+                <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
                 <div className="flex">
                     <button 
                         className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
@@ -97,9 +92,8 @@ function DeletarPostagem() {
                     </button>
                     <button 
                         className='w-full text-slate-100 bg-indigo-400 
-                        hover:bg-indigo-600 flex items-center justify-center'
-                        onClick={deletarPostagem}>
-                        
+                                   hover:bg-indigo-600 flex items-center justify-center'
+                                   onClick={deletarTema}>
                         {isLoading ?
                             <RotatingLines
                                 strokeColor="white"
@@ -116,5 +110,4 @@ function DeletarPostagem() {
         </div>
     )
 }
-
-export default DeletarPostagem;
+export default DeletarTema
