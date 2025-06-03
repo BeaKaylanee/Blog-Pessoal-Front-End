@@ -92,7 +92,7 @@ function FormPostagem() {
   async function gerarNovaPostagem(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
-
+  
     const postagemParaEnviar = {
       titulo: postagem.titulo,
       texto: postagem.texto,
@@ -100,10 +100,10 @@ function FormPostagem() {
         id: tema.id,
       },
     };
-
+  
     try {
       if (id !== undefined) {
-        await atualizar(`/postagens/${id}`, postagemParaEnviar, setPostagem, {
+        await atualizar(`/postagens`, { ...postagemParaEnviar, id: Number(id) }, setPostagem, {
           headers: {
             Authorization: token,
           },
@@ -115,7 +115,7 @@ function FormPostagem() {
             Authorization: token,
           },
         });
-        ToastAlerta("Postagem cadastrada com sucesso!", "sucesso");
+        ToastAlerta("Postagem cadastrada com sucesso", "sucesso");
       }
     } catch (error: any) {
       if (error.toString().includes("403")) {
@@ -133,6 +133,7 @@ function FormPostagem() {
       retornar();
     }
   }
+  
 
   const carregandoTema = tema.id === 0;
 

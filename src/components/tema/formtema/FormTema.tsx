@@ -1,10 +1,10 @@
 import { type ChangeEvent, useContext, useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate, useParams } from "react-router";
-import { AuthContext } from "../../contexts/AuthContext";
-import type Tema from "../../models/Tema";
-import { atualizar, buscar, cadastrar } from "../../services/Service";
-import { ToastAlerta } from "../../utils/ToastAlerta";
+import { AuthContext } from "../../../contexts/AuthContext";
+import type Tema from "../../../models/Tema";
+import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormTema() {
 
@@ -60,9 +60,9 @@ function FormTema() {
 
         if (id !== undefined) {
             try {
-                await atualizar(`/temas`, tema, setTema, {
+                await atualizar(`/temas/${id}`, tema, setTema, {
                     headers: { 'Authorization': token }
-                })
+                  })                  
                 ToastAlerta("O Tema foi atualizado com sucesso!", "sucesso")
             } catch (error: any) {
                 if (error.toString().includes('403')) {
